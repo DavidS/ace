@@ -8,6 +8,11 @@ require 'ace/config'
 RSpec.describe ACE::TransportApp do
   include Rack::Test::Methods
 
+  before do
+    # see: https://github.com/bblimke/webmock#connecting-on-nethttpstart
+    WebMock.allow_net_connect!(net_http_connect_on_start: true)
+  end
+
   def app
     ACE::TransportApp.new(ACE::Config.new(base_config))
   end

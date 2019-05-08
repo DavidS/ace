@@ -2,7 +2,6 @@
 
 require 'ace/plugin_cache'
 require 'ace/puppet_util'
-require 'webmock/rspec'
 require 'hocon'
 
 RSpec.describe ACE::PluginCache do
@@ -13,6 +12,7 @@ RSpec.describe ACE::PluginCache do
   let(:params) { '?checksum_type=md5&environment=production&ignore=.hg&links=follow&recurse=true&source_permissions=' }
 
   before do
+    WebMock.disable_net_connect!
     allow(ACE::ForkUtil).to receive(:isolate).and_yield
   end
 
